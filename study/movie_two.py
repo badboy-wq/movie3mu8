@@ -114,7 +114,8 @@ if __name__ == '__main__':
 
         a = r'\/([0-9]{4}).ts'
         b = re.findall(a, i)[0]#取最后4位数字
-        a=requests.get(i,headers=hed, verify=False,).content#将视频转换成2进制
+
+        a=requests.get(i,headers=hed, verify=False,timeout=300).content#将视频转换成2进制
         with open ('D://study/movie/%s/%s.ts'%(timea,b),'wb+') as kk:
             kk.write(a)
             print('下载ok')
