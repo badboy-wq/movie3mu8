@@ -5,7 +5,7 @@ import os
 import time
 import random
 def url_3mu8():
-    url = 'http://www.b2fd.com/AAyidong/AAAbf/52745-play.html?52745-0-1'
+    url = 'http://www.b2fd.com/AAyidong/AAAbf/47205-play.html?47205-0-1'
     hed = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
         "cookie": "HMACCOUNT_BFESS=047733F3B123839E; BAIDUID_BFESS=5FCA5036929B4B2F87D556BCB4ED77F8:FG=1"}
