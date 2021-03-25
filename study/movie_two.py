@@ -35,7 +35,8 @@ def url_3mu8():
     return j #返回m3u8地址
 def mas_m3u8():
 
-    with open(r'D:/study/demo1/study/file/index .m3u8') as f:
+    # with open(r'D:/study/demo1/study/file/index .m3u8') as f:
+    with open (r'D:/study/demo1/study/file_two/index .m3u8') as f:
         c=0
         list1 = []
         for a in f:
@@ -95,7 +96,11 @@ if __name__ == '__main__':
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
                       "X-Forwarded-For": ip
         }
-    b= requests.get(url=a, headers=hed, verify=False)
+    b= requests.get(url=a, headers=hed, verify=False).content
+    os.remove('D://study/demo1/study/file_two/index .m3u8')
+    with open ('D://study/demo1/study/file_two/index .m3u8',('wb+')) as pp:
+        pp.write(b)
+
 
     list2=[]#返回url列表
 

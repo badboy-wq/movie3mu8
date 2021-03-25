@@ -78,16 +78,18 @@ def add_ts():
     # cmd = 'ffmpeg -i "concat:%s" -acodec copy -vcodec copy -absf aac_adtstoasc %s' % (tsfiles, saveMp4file)
     # os.system(cmd)
     # print('合并成功')
-def heBingTsVideo(download_path, hebing_path):
-        all_ts = os.listdir(download_path)
+# def heBingTsVideo(download_path, hebing_path):
+#         all_ts = os.listdir(download_path)
+#
+#         with open(hebing_path, 'wb+') as f:
+#             for i in range(len(all_ts)):
+#                 ts_video_path = os.path.join(download_path, all_ts[i])
+#                 f.write(open(ts_video_path, 'rb').read())
+#         print("合并完成！！")
+#
+#
+#
+# if __name__ == '__main__':
+#     heBingTsVideo(r'D://study/movie/',r'D://study/movie/123456.mp4')
 
-        with open(hebing_path, 'wb+') as f:
-            for i in range(len(all_ts)):
-                ts_video_path = os.path.join(download_path, all_ts[i])
-                f.write(open(ts_video_path, 'rb').read())
-        print("合并完成！！")
-
-
-
-if __name__ == '__main__':
-    heBingTsVideo(r'D://study/movie/',r'D://study/movie/123456.mp4')
+os.remove('D://study/1/asdfsa.txt')
