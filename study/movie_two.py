@@ -4,6 +4,8 @@ import re
 import os
 import time
 import random
+import threading
+
 def url_3mu8():
     url = 'http://www.b2fd.com/AAyidong/AAAbf/47205-play.html?47205-0-1'
     hed = {
