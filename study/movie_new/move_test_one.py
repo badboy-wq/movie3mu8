@@ -94,7 +94,7 @@ def  six_threding_movie(url2):
         except requests.exceptions.ConnectionError :
             with open('D://demo1/movie3mu8/study/file/1234.csv', 'a+') as ff:
                 print('将超时文件写入')
-                ff.write(url2+'\n')
+                ff.write(timea+'\r'+url2+'\n')
                 ff.close()
 
 
@@ -132,18 +132,22 @@ def all_path(dirname):
      return list
 if __name__ == '__main__':
     list_url=movie_three.movie_url()
+
     for url in list_url:
         # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
         loke = threading.RLock()
         l=[]
         l2=[]
         list3=[]
+        sem=threading.Semaphore(20)
         for k,v in movie_six_one(url).items():
             l.append(k)
         for a in l:
+            sem.acquire()
             t=threading.Thread(target=six_threding_movie,args=(a,))
             t.start()
             print("开始线程")
+            sem.release()
             l2.append(t)
         for b in l2:
             b.join()
