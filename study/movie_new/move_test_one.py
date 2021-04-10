@@ -131,25 +131,25 @@ def all_path(dirname):
 
      return list
 if __name__ == '__main__':
-    # list_url=movie_three.movie_url()
-    # for url in list_url:
-    #     # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
-    #     loke = threading.RLock()
-    #     l=[]
-    #     l2=[]
-    #     list3=[]
-    #     for k,v in movie_six_one(url).items():
-    #         l.append(k)
-    #     for a in l:
-    #         t=threading.Thread(target=six_threding_movie,args=(a,))
-    #         t.start()
-    #         print("开始线程")
-    #         l2.append(t)
-    #     for b in l2:
-    #         b.join()
-    #         print('下载完成')
-    #     a = url.split('/')
-    #     list3.append(a)
+    list_url=movie_three.movie_url()
+    for url in list_url:
+        # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
+        loke = threading.RLock()
+        l=[]
+        l2=[]
+        list3=[]
+        for k,v in movie_six_one(url).items():
+            l.append(k)
+        for a in l:
+            t=threading.Thread(target=six_threding_movie,args=(a,))
+            t.start()
+            print("开始线程")
+            l2.append(t)
+        for b in l2:
+            b.join()
+            print('下载完成')
+        a = url.split('/')
+        list3.append(a)
 
     six_heBingTsVideo()
         # timea=list3[0][-2]
