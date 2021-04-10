@@ -94,7 +94,7 @@ def  six_threding_movie(url2):
         except requests.exceptions.ConnectionError :
             with open('D://demo1/movie3mu8/study/file/1234.csv', 'a+') as ff:
                 print('将超时文件写入')
-                ff.write(url2)
+                ff.write(url2+'\n')
                 ff.close()
 
 
