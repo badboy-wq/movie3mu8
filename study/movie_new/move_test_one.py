@@ -7,6 +7,9 @@ import os
 import re
 import socket
 
+import urllib3
+
+
 from urllib import error
 
 def movie_six_one(url):
@@ -53,6 +56,7 @@ def movie_six_one(url):
     return dic
 def  six_threding_movie(url2):
     """下载ts视频并保存"""
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     hed = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
         "cookie": "HMACCOUNT_BFESS=047733F3B123839E; BAIDUID_BFESS=5FCA5036929B4B2F87D556BCB4ED77F8:FG=1"}
@@ -87,46 +91,67 @@ def  six_threding_movie(url2):
                 kk.write(req)
 
                 print('下载%sok'%v)
-        except error.URLError :
-            with open('D://demo1/movie3mu8/study/file/123.txt' , 'a+') as ff:
+        except requests.exceptions.ConnectionError :
+            with open('D://demo1/movie3mu8/study/file/1234.csv', 'a+') as ff:
+                print('将超时文件写入')
                 ff.write(url2)
                 ff.close()
 
 
 
 
-def six_heBingTsVideo(download_path, hebing_path):
+def six_heBingTsVideo():
+    lis1=all_path('D:\study\movie')
+    for i in lis1[1:]:
+        download_path=i
+        a=r'D:\\study\\movie\\(.*)'
+        b=re.findall(a,i)[0]
+        print(b)
+        hebing_path=r'D://study/movie/mp4/%s.mp4' %b
+        all_ts = os.listdir(download_path)  # "合并ts文件"
+            # heBingTsVideo(r'D://study/movie/', r'D://study/movie/123456.mp4')
 
-    all_ts = os.listdir(download_path)  # "合并ts文件"
-        # heBingTsVideo(r'D://study/movie/', r'D://study/movie/123456.mp4')
+        with open(hebing_path, 'wb+') as f:
+            for i in range(len(all_ts)):
+                ts_video_path = os.path.join(download_path, all_ts[i])
+                f.write(open(ts_video_path, 'rb').read())
+        print("合并完成！！")
+def all_path(dirname):
+     list=[]
+     result = []#所有的文件
+     for maindir, subdir, file_name_list in os.walk(dirname):
+         list.append(maindir)
+         print("1:",maindir) #当前主目录
+         # print("2:",subdir) #当前主目录下的所有目录
+         # print("3:",file_name_list)  #当前主目录下的所有文件
+         #
+         # for filename in file_name_list:
+         #     apath = os.path.join(maindir, filename)#合并成一个完整路径
+         #     result.append(apath)
 
-    with open(hebing_path, 'wb+') as f:
-        for i in range(len(all_ts)):
-            ts_video_path = os.path.join(download_path, all_ts[i])
-            f.write(open(ts_video_path, 'rb').read())
-    print("合并完成！！")
+     return list
 if __name__ == '__main__':
-    list_url=movie_three.movie_url()
-    for url in list_url:
-        # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
-        loke = threading.RLock()
-        l=[]
-        l2=[]
-        list3=[]
-        for k,v in movie_six_one(url).items():
-            l.append(k)
-        for a in l:
-            t=threading.Thread(target=six_threding_movie,args=(a,))
-            t.start()
-            print("开始线程")
-            l2.append(t)
-        for b in l2:
-            b.join()
-            print('下载完成')
-        a = url.split('/')
-        list3.append(a)
+    # list_url=movie_three.movie_url()
+    # for url in list_url:
+    #     # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
+    #     loke = threading.RLock()
+    #     l=[]
+    #     l2=[]
+    #     list3=[]
+    #     for k,v in movie_six_one(url).items():
+    #         l.append(k)
+    #     for a in l:
+    #         t=threading.Thread(target=six_threding_movie,args=(a,))
+    #         t.start()
+    #         print("开始线程")
+    #         l2.append(t)
+    #     for b in l2:
+    #         b.join()
+    #         print('下载完成')
+    #     a = url.split('/')
+    #     list3.append(a)
 
-
+    six_heBingTsVideo()
         # timea=list3[0][-2]
         # six_heBingTsVideo(r'D://study/movie/%s'%timea, r'D://study/movie/mp4/%s.mp4'%timea)
 
