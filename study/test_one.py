@@ -116,6 +116,11 @@ def add_ts():
 # for i in ls :
 #     c=re.findall(r'([1-9]{1,3}(\.[0-9]{1,3}){3})',i)
 #     print(c)
-proc_random='113.233.70.88:4240'
-pr={"http":"http//"+proc_random}
-print(pr)
+# proc_random='113.233.70.88:4240'
+# # pr={"http":"http//"+proc_random}
+# # print(pr)
+
+a=1
+while a<100:
+    a=a+1
+    print(a)

@@ -2,15 +2,16 @@
 import threading
 import requests
 import time
-from movie3mu8.study import movie_three
+from study import movie_three
 import os
 import re
 import socket
-
+from study.movie_new import movie_test_five
 import urllib3
 
 
 from urllib import error
+"""最新下载文件很重要"""
 
 def movie_six_one(url):
     "提取一个地址的m3u8，返回k：.ts地址，b：地址最后4位数字"
@@ -28,13 +29,13 @@ def movie_six_one(url):
     time.sleep(1)
     try:
         b = requests.get(url=a, headers=hed, verify=False, timeout=300).content
-        # os.remove('D://study/demo1/study/file_two/index .m3u8')
-        os.remove('D://demo1/movie3mu8/study/file_two/index .m3u8')
+        os.remove('D://study/study/file_two/index .m3u8') #home
+        # os.remove('D://demo1/movie3mu8/study/file_two/index .m3u8')
 
-        # with open('D://study/demo1/study/file_two/index .m3u8', ('wb+')) as pp:
-        #     pp.write(b)
-        with open('D://demo1/movie3mu8/study/file_two/index .m3u8', ('wb+')) as pp:
+        with open('D://study/study/file_two/index .m3u8', ('wb+')) as pp:#home
             pp.write(b)
+        # with open('D://demo1/movie3mu8/study/file_two/index .m3u8', ('wb+')) as pp:
+        #     pp.write(b)
         list2 = []  # 返回url列表
 
         for f in movie_three.mas_m3u8():  # 对url进行拼接
@@ -78,21 +79,22 @@ def  six_threding_movie(url2):
         # os.makedirs('D://study/movie/' + timea)
             # a = requests.get(k, headers=hed, verify=False, timeout=300).content  # 将视频转换成2进制
 
-        socket.setdefaulttimeout(20)  # 这里对整个socket层设置超时时间。后续文件中如果再使用到socket，不必再设置
+        socket.setdefaulttimeout(10)  # 这里对整个socket层设置超时时间。后续文件中如果再使用到socket，不必再设置
         sleep_download_time = 2
         time.sleep(sleep_download_time)  # 这里时间自己设定
         print('正在请求%s'%url2)
         # pr={"http": "http://221.10.217.63:4285"}
         try:
-            req = requests.get(url=url2, headers=hed, verify=False,timeout=300).content
+            req = requests.get(url=url2, headers=hed, verify=False,timeout=10).content
 
             with open('D://study/movie/%s/%s.ts' % (timea, v), 'wb+') as kk:
                 # print('正在下载%s'%v)
                 kk.write(req)
 
                 print('下载%sok'%v)
-        except requests.exceptions.ConnectionError :
-            with open('D://demo1/movie3mu8/study/file/1234.csv', 'a+') as ff:
+        except  :
+            # with open('D://demo1/movie3mu8/study/file/1234.csv', 'a+') as ff: #home
+            with open('D://study/study/file/1234.csv', 'a+') as ff: #home
                 print('将超时文件写入')
                 ff.write(timea+'\r'+url2+'\n')
                 ff.close()
@@ -130,7 +132,8 @@ def all_path(dirname):
          #     result.append(apath)
 
      return list
-if __name__ == '__main__':
+def paquets():
+    """最终下载方法第一次下载视频方法"""
     list_url=movie_three.movie_url()
 
     for url in list_url:
@@ -139,7 +142,7 @@ if __name__ == '__main__':
         l=[]
         l2=[]
         list3=[]
-        sem=threading.Semaphore(20)
+        sem=threading.Semaphore(5)
         for k,v in movie_six_one(url).items():
             l.append(k)
         for a in l:
@@ -154,8 +157,32 @@ if __name__ == '__main__':
             print('下载完成')
         a = url.split('/')
         list3.append(a)
+if __name__ == '__main__':
+    list_url=movie_three.movie_url()
 
-    six_heBingTsVideo()
+    for url in list_url:
+        # url='http://www.b2fd.com/AAyidong/AAAbf/56030-play.html?56030-0-1'
+        loke = threading.RLock()
+        l=[]
+        l2=[]
+        list3=[]
+        sem=threading.Semaphore(5)
+        for k,v in movie_six_one(url).items():
+            l.append(k)
+        for a in l:
+            sem.acquire()
+            t=threading.Thread(target=six_threding_movie,args=(a,))
+            t.start()
+            print("开始线程")
+            sem.release()
+            l2.append(t)
+        for b in l2:
+            b.join()
+            print('下载完成')
+        a = url.split('/')
+        list3.append(a)
+    # movie_test_five.final_ts()
+    # six_heBingTsVideo()
         # timea=list3[0][-2]
         # six_heBingTsVideo(r'D://study/movie/%s'%timea, r'D://study/movie/mp4/%s.mp4'%timea)
 

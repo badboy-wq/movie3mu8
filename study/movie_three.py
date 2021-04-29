@@ -41,8 +41,8 @@ def url_3mu8(url):
 
 def mas_m3u8():
 
-    # with open(r'D:/study/demo1/study/file/index .m3u8') as f:
-    with open (r'D:/study/demo1/study/file_two/index .m3u8') as f:
+    with open(r'D:/study/demo1/study/file/index .m3u8') as f:
+    # with open (r'D:/study/demo1/study/file_two/index .m3u8') as f: #home
         c=0
         list1 = []
         for a in f:
@@ -65,7 +65,7 @@ def dir_movie():
 
 def movie_url():
     """返回主页面url地址"""
-    url='http://www.b2fd.com/AAyidong/AAAlb/juruboba/index-4.html'
+    url='http://www.b2fd.com/AAyidong/AAAlb/juruboba/index-3.html'
 
     hed = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
